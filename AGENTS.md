@@ -8,6 +8,8 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+Before committing, run `npm run lint` (ESLint, flat config in `eslint.config.js`), `npm run check` (`astro check`), and `npm run format`.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build

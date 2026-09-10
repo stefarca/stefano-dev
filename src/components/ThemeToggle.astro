@@ -88,7 +88,9 @@
     document.documentElement.dataset.theme = next;
     try {
       localStorage.setItem(KEY, next);
-    } catch {}
+    } catch {
+      /* storage unavailable */
+    }
     sync();
   });
 
