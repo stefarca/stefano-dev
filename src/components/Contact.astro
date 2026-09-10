@@ -1,0 +1,124 @@
+---
+import { profile } from "../data/profile";
+---
+
+<div class="contact">
+  <p class="contact__statement reveal">
+    Have something you're building, or want to?
+    <span class="accent-text">Let's talk.</span>
+  </p>
+
+  <a
+    class="contact__email reveal"
+    href={`mailto:${profile.email}`}
+    style="--reveal-delay: 80ms"
+  >
+    {profile.email}
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      aria-hidden="true"
+    >
+      <path
+        d="M5 12h14M13 6l6 6-6 6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+  </a>
+
+  <ul class="contact__socials reveal" role="list" style="--reveal-delay: 140ms">
+    {profile.socials.map((social) => (
+      <li>
+        <a
+          href={social.href}
+          target={social.href.startsWith("http") ? "_blank" : undefined}
+          rel={social.href.startsWith("http") ? "noreferrer" : undefined}
+        >
+          <span class="contact__socials-label">{social.label}</span>
+          <span class="contact__socials-handle">{social.handle}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .contact {
+    display: grid;
+    gap: var(--space-l);
+  }
+
+  .contact__statement {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    max-width: 24ch;
+    color: var(--text-dim);
+  }
+  .contact__statement .accent-text {
+    display: block;
+    color: transparent;
+  }
+
+  .contact__email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    justify-self: start;
+    font-size: var(--step-2);
+    font-family: var(--font-display);
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border-strong);
+    transition:
+      color var(--dur) var(--ease-out),
+      border-color var(--dur) var(--ease-out);
+  }
+  .contact__email svg {
+    width: 0.8em;
+    height: 0.8em;
+    transition: transform var(--dur) var(--ease-out);
+  }
+  .contact__email:hover {
+    color: var(--accent-1);
+    border-color: var(--accent-1);
+  }
+  .contact__email:hover svg {
+    transform: translateX(4px);
+  }
+
+  .contact__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .contact__socials a {
+    display: grid;
+    gap: 0.3rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    min-width: 11rem;
+    transition:
+      border-color var(--dur) var(--ease-out),
+      transform var(--dur) var(--ease-out);
+  }
+  .contact__socials a:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+  .contact__socials-label {
+    font: 500 var(--step--1) / 1 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .contact__socials-handle {
+    font-size: var(--step--1);
+    color: var(--text-mute);
+  }
+</style>

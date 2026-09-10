@@ -1,0 +1,75 @@
+---
+import { profile } from "../data/profile";
+---
+
+<div class="about">
+  <div class="about__prose reveal">
+    {profile.about.map((para) => (
+      <p>{para}</p>
+    ))}
+  </div>
+
+  <aside class="about__now reveal" style="--reveal-delay: 90ms">
+    <p class="eyebrow">Currently</p>
+    <ul role="list">
+      {profile.now.map((item) => (
+        <li>
+          <span class="about__now-tick" aria-hidden="true" />
+          {item}
+        </li>
+      ))}
+    </ul>
+  </aside>
+</div>
+
+<style>
+  .about {
+    display: grid;
+    gap: var(--space-l);
+  }
+
+  .about__prose {
+    max-width: var(--measure);
+    display: grid;
+    gap: var(--space-s);
+    font-size: var(--step-1);
+    color: var(--text-dim);
+  }
+  .about__prose p {
+    text-wrap: pretty;
+  }
+
+  .about__now {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    padding: var(--space-m);
+    background: color-mix(in oklab, var(--bg-elev) 55%, transparent);
+  }
+  .about__now ul {
+    margin-top: var(--space-s);
+    display: grid;
+    gap: 0.7rem;
+  }
+  .about__now li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    align-items: baseline;
+    font-size: var(--step-0);
+  }
+  .about__now-tick {
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--accent-gradient);
+    translate: 0 -1px;
+  }
+
+  @media (min-width: 46rem) {
+    .about {
+      grid-template-columns: minmax(0, 1fr) minmax(15rem, 20rem);
+      align-items: start;
+      gap: var(--space-xl);
+    }
+  }
+</style>

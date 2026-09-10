@@ -1,0 +1,19 @@
+---
+import { projects } from "../data/projects";
+import ProjectCard from "./ProjectCard.astro";
+
+const featured = projects.filter((project) => project.featured);
+---
+
+<div class="work">
+  {featured.map((project, i) => (
+    <ProjectCard project={project} index={i} />
+  ))}
+</div>
+
+<style>
+  .work {
+    display: grid;
+    gap: var(--space-m);
+  }
+</style>

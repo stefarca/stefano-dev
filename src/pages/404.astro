@@ -1,0 +1,56 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Not found" description="That page doesn't exist." noindex>
+  <section class="notfound">
+    <div class="container notfound__inner">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="notfound__title">
+        This page <span class="accent-text">folded flat.</span>
+      </h1>
+      <p class="notfound__text">
+        The link is broken or the page moved. Nothing lost — head back to the
+        start.
+      </p>
+      <a class="btn btn--primary" href="/">
+        Back home
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path
+            d="M5 12h14M13 6l6 6-6 6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .notfound {
+    min-height: 82svh;
+    display: flex;
+    align-items: center;
+    padding-block: 8rem var(--space-2xl);
+  }
+  .notfound__inner {
+    display: grid;
+    gap: var(--space-m);
+    justify-items: start;
+  }
+  .notfound__title {
+    font-size: var(--step-5);
+  }
+  .notfound__text {
+    max-width: 42ch;
+    color: var(--text-dim);
+    font-size: var(--step-1);
+  }
+</style>

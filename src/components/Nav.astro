@@ -1,0 +1,315 @@
+---
+import { navItems } from "../data/nav";
+import { profile } from "../data/profile";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const initials = profile.name
+  .split(" ")
+  .map((part) => part[0])
+  .join("")
+  .slice(0, 2)
+  .toUpperCase();
+---
+
+<header class="nav" data-nav>
+  <div class="container nav__inner">
+    <a class="nav__brand" href="/#top">
+      <span class="nav__mark" aria-hidden="true">
+        {initials}
+      </span>
+      <span class="visually-hidden">{profile.name} — back to top</span>
+    </a>
+
+    <button
+      class="nav__toggle"
+      type="button"
+      data-nav-toggle
+      aria-expanded="false"
+      aria-controls="nav-menu"
+    >
+      <span class="visually-hidden">Menu</span>
+      <span class="nav__toggle-bars" aria-hidden="true"></span>
+    </button>
+
+    <div class="nav__menu" id="nav-menu" data-nav-menu>
+      <nav aria-label="Page sections">
+        <ul class="nav__links" role="list">
+          {navItems.map((item) => (
+            <li>
+              <a
+                class="nav__link"
+                href={`/#${item.id}`}
+                data-nav-link={item.id}
+              >
+                <span class="nav__link-index" aria-hidden="true">
+                  {item.index}
+                </span>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="nav__theme">
+        <ThemeToggle />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: var(--z-nav);
+    padding-block: 0.75rem;
+    transition:
+      background var(--dur) var(--ease-out),
+      border-color var(--dur) var(--ease-out),
+      backdrop-filter var(--dur) var(--ease-out);
+    border-bottom: 1px solid transparent;
+  }
+  .nav[data-scrolled] {
+    background: color-mix(in oklab, var(--bg) 72%, transparent);
+    backdrop-filter: blur(12px) saturate(1.4);
+    border-bottom-color: var(--border);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+  }
+
+  .nav__brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-s);
+    font: 600 var(--step--1) / 1 var(--font-mono);
+    letter-spacing: 0.06em;
+    background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
+    transition:
+      color var(--dur) var(--ease-out),
+      border-color var(--dur) var(--ease-out);
+  }
+  .nav__brand:hover {
+    color: var(--accent-1);
+    border-color: var(--accent-1);
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .nav__link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: var(--radius-s);
+    font: 500 var(--step--1) / 1 var(--font-mono);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition:
+      color var(--dur) var(--ease-out),
+      background var(--dur) var(--ease-out);
+  }
+  .nav__link-index {
+    font-size: 0.72em;
+    color: var(--text-mute);
+    transition: color var(--dur) var(--ease-out);
+  }
+  .nav__link:hover {
+    color: var(--text);
+    background: color-mix(in oklab, var(--bg-elev) 60%, transparent);
+  }
+  .nav__link[aria-current="true"] {
+    color: var(--text);
+  }
+  .nav__link[aria-current="true"] .nav__link-index {
+    color: var(--accent-1);
+  }
+
+  .nav__menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+  }
+
+  .nav__toggle {
+    display: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
+    cursor: pointer;
+  }
+  .nav__toggle-bars,
+  .nav__toggle-bars::before,
+  .nav__toggle-bars::after {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    margin-inline: auto;
+    background: currentColor;
+    transition:
+      transform var(--dur) var(--ease-out),
+      opacity var(--dur-fast) linear;
+  }
+  .nav__toggle-bars::before,
+  .nav__toggle-bars::after {
+    content: "";
+    position: relative;
+  }
+  .nav__toggle-bars::before {
+    top: -5px;
+  }
+  .nav__toggle-bars::after {
+    top: 3.5px;
+  }
+  .nav[data-open] .nav__toggle-bars {
+    transform: rotate(45deg);
+  }
+  .nav[data-open] .nav__toggle-bars::before {
+    transform: rotate(90deg) translateX(5px);
+  }
+  .nav[data-open] .nav__toggle-bars::after {
+    opacity: 0;
+  }
+
+  @media (max-width: 48rem) {
+    .nav__toggle {
+      display: block;
+    }
+    .nav__menu {
+      position: absolute;
+      inset: calc(100% + 0.5rem) var(--gutter) auto var(--gutter);
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-s);
+      padding: var(--space-s);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-m);
+      background: color-mix(in oklab, var(--bg-elev) 96%, transparent);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-2);
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      transform-origin: top right;
+      pointer-events: none;
+      transition:
+        opacity var(--dur) var(--ease-out),
+        transform var(--dur) var(--ease-out);
+    }
+    .nav[data-open] .nav__menu {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+    .nav__links {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.15rem;
+    }
+    .nav__link {
+      padding: 0.7rem;
+      font-size: var(--step-0);
+    }
+    .nav__theme {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: var(--space-2xs);
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-nav]");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+  const menu = document.querySelector<HTMLElement>("[data-nav-menu]");
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"),
+  );
+
+  /* --- scrolled state --- */
+  const onScroll = () => {
+    if (!nav) return;
+    nav.toggleAttribute("data-scrolled", window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* --- mobile disclosure --- */
+  const setOpen = (open: boolean) => {
+    nav?.toggleAttribute("data-open", open);
+    toggle?.setAttribute("aria-expanded", String(open));
+  };
+
+  toggle?.addEventListener("click", () =>
+    setOpen(toggle.getAttribute("aria-expanded") !== "true"),
+  );
+
+  menu?.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("[data-nav-link]")) setOpen(false);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+
+  const desktop = window.matchMedia("(min-width: 48.0625rem)");
+  desktop.addEventListener("change", (e) => {
+    if (e.matches) setOpen(false);
+  });
+
+  /* --- active section --- */
+  const sections = links
+    .map((link) => document.getElementById(link.dataset.navLink ?? ""))
+    .filter((el): el is HTMLElement => Boolean(el));
+
+  const setCurrent = (id: string | null) => {
+    for (const link of links) {
+      if (link.dataset.navLink === id) {
+        link.setAttribute("aria-current", "true");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    }
+  };
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const visible = new Map<string, number>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            visible.set(entry.target.id, entry.intersectionRatio);
+          } else {
+            visible.delete(entry.target.id);
+          }
+        }
+        let top: string | null = null;
+        let best = -1;
+        for (const [id, ratio] of visible) {
+          if (ratio > best) {
+            best = ratio;
+            top = id;
+          }
+        }
+        setCurrent(top);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] },
+    );
+    for (const section of sections) observer.observe(section);
+  }
+</script>

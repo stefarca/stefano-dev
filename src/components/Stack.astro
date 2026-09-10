@@ -1,0 +1,66 @@
+---
+import { stack } from "../data/stack";
+---
+
+<div class="stack">
+  {stack.map((group, i) => (
+    <div class="stack__group reveal" style={`--reveal-delay: ${i * 70}ms`}>
+      <h3 class="stack__label">{group.label}</h3>
+      <ul class="stack__items" role="list">
+        {group.items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stack {
+    display: grid;
+    gap: var(--space-l);
+  }
+
+  .stack__group {
+    display: grid;
+    gap: var(--space-s);
+    padding-top: var(--space-s);
+    border-top: 1px solid var(--border);
+  }
+
+  .stack__label {
+    font: 500 var(--step--1) / 1 var(--font-mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+  }
+
+  .stack__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.6rem;
+  }
+  .stack__items li {
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    font-size: var(--step--1);
+    color: var(--text-dim);
+    background: color-mix(in oklab, var(--bg-elev) 45%, transparent);
+    transition:
+      color var(--dur) var(--ease-out),
+      border-color var(--dur) var(--ease-out);
+  }
+  .stack__items li:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+
+  @media (min-width: 52rem) {
+    .stack__group {
+      grid-template-columns: 12rem minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-m);
+    }
+  }
+</style>

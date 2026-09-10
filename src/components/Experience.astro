@@ -1,0 +1,91 @@
+---
+import { experience } from "../data/experience";
+---
+
+<ol class="timeline" role="list">
+  {experience.map((job, i) => (
+    <li class="timeline__item reveal" style={`--reveal-delay: ${i * 80}ms`}>
+      <div class="timeline__marker" aria-hidden="true" />
+      <div class="timeline__period">
+        <span>{job.start}</span>
+        <span class="timeline__dash">—</span>
+        <span>{job.end}</span>
+      </div>
+      <div class="timeline__body">
+        <h3 class="timeline__role">
+          {job.role} <span class="timeline__org">· {job.org}</span>
+        </h3>
+        <p class="timeline__summary">{job.summary}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .timeline {
+    display: grid;
+    gap: var(--space-l);
+  }
+
+  .timeline__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-m);
+    row-gap: 0.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .timeline__marker {
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 9px;
+    height: 9px;
+    border-radius: var(--radius-full);
+    background: var(--accent-gradient);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent-1) 15%, transparent);
+  }
+  .timeline__item::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 1.2rem;
+    bottom: -1.9rem;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline__item:last-child::before {
+    display: none;
+  }
+
+  .timeline__period {
+    font: 500 var(--step--1) / 1.4 var(--font-mono);
+    letter-spacing: 0.04em;
+    color: var(--text-mute);
+    white-space: nowrap;
+  }
+  .timeline__dash {
+    margin-inline: 0.3rem;
+  }
+
+  .timeline__role {
+    font-size: var(--step-1);
+    font-family: var(--font-display);
+  }
+  .timeline__org {
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+  .timeline__summary {
+    margin-top: 0.35rem;
+    color: var(--text-dim);
+    max-width: 58ch;
+  }
+
+  @media (max-width: 40rem) {
+    .timeline__item {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

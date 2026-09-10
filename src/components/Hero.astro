@@ -1,0 +1,198 @@
+---
+import { profile } from "../data/profile";
+
+const [firstName, ...rest] = profile.name.split(" ");
+const lastName = rest.join(" ");
+---
+
+<section class="hero" id="top">
+  <div class="container hero__inner">
+    <p class="eyebrow hero__eyebrow">
+      {profile.role} <span class="hero__dot">·</span>
+      {profile.location}
+    </p>
+
+    <h1 class="hero__name" aria-label={profile.name}>
+      <span class="hero__name-line" aria-hidden="true">
+        {firstName}
+      </span>
+      <span class="hero__name-line accent-text" aria-hidden="true">
+        {lastName}
+      </span>
+    </h1>
+
+    <p class="hero__pitch">{profile.pitch}</p>
+
+    <div class="hero__actions">
+      <a class="btn btn--primary" href={`mailto:${profile.email}`}>
+        Get in touch
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path
+            d="M5 12h14M13 6l6 6-6 6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </a>
+      <a
+        class="btn btn--ghost"
+        href={profile.socials[0].href}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {profile.socials[0].label}
+      </a>
+      {profile.resume && (
+        <a class="btn btn--ghost" href={profile.resume}>
+          Résumé
+        </a>
+      )}
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#about" aria-label="Scroll to about">
+    <span class="hero__scroll-text">Scroll</span>
+    <span class="hero__scroll-track">
+      <span class="hero__scroll-thumb"></span>
+    </span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: 7rem var(--space-xl);
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+  }
+
+  .hero__eyebrow {
+    opacity: 0;
+    animation: hero-in 0.7s var(--ease-out) 0.05s forwards;
+  }
+  .hero__dot {
+    margin-inline: 0.4rem;
+    color: var(--accent-1);
+  }
+
+  .hero__name {
+    font-size: var(--step-6);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+  .hero__name-line {
+    display: block;
+    opacity: 0;
+    animation: hero-in 0.9s var(--ease-out) forwards;
+  }
+  .hero__name-line:nth-child(1) {
+    animation-delay: 0.12s;
+  }
+  .hero__name-line:nth-child(2) {
+    animation-delay: 0.22s;
+  }
+
+  .hero__pitch {
+    max-width: 46ch;
+    font-size: var(--step-2);
+    color: var(--text-dim);
+    line-height: 1.45;
+    opacity: 0;
+    animation: hero-in 0.9s var(--ease-out) 0.34s forwards;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-s);
+    opacity: 0;
+    animation: hero-in 0.9s var(--ease-out) 0.46s forwards;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 1.75rem;
+    translate: -50% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-mute);
+    font: 500 0.7rem / 1 var(--font-mono);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: hero-in 1s var(--ease-out) 0.7s forwards;
+  }
+  .hero__scroll-track {
+    width: 1px;
+    height: 3rem;
+    background: var(--border-strong);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__scroll-thumb {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 40%;
+    background: var(--accent-gradient);
+    animation: scroll-cue 2.2s var(--ease-in-out) infinite;
+  }
+
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes scroll-cue {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(250%);
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .hero__scroll {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__eyebrow,
+    .hero__name-line,
+    .hero__pitch,
+    .hero__actions,
+    .hero__scroll {
+      opacity: 1;
+      animation: none;
+    }
+    .hero__scroll-thumb {
+      animation: none;
+    }
+  }
+</style>

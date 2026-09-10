@@ -1,0 +1,92 @@
+---
+import { profile } from "../data/profile";
+import { site } from "../data/site";
+
+const year = new Date().getFullYear();
+const sourceUrl = "https://github.com/stefarca/stefano-dev";
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="footer__meta">
+      <span>
+        © {year} {profile.name}
+      </span>
+      <span class="footer__sep" aria-hidden="true">
+        /
+      </span>
+      <span>Built with Astro, deployed on Cloudflare</span>
+    </p>
+
+    <div class="footer__links">
+      <a href={sourceUrl} target="_blank" rel="noreferrer">
+        Source
+      </a>
+      <a href="/#top">Back to top ↑</a>
+    </div>
+  </div>
+  <p class="footer__wordmark" aria-hidden="true">
+    {site.title}
+  </p>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    border-top: 1px solid var(--border);
+    padding-block: var(--space-l) var(--space-m);
+    overflow: hidden;
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-s);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    font-size: var(--step--1);
+    color: var(--text-mute);
+  }
+  .footer__sep {
+    color: var(--border-strong);
+  }
+
+  .footer__links {
+    display: flex;
+    gap: 1.25rem;
+    font: 500 var(--step--1) / 1 var(--font-mono);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .footer__links a {
+    color: var(--text-dim);
+  }
+  .footer__links a:hover {
+    color: var(--text);
+  }
+
+  .footer__wordmark {
+    position: absolute;
+    left: 50%;
+    bottom: -0.28em;
+    translate: -50% 0;
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(3.5rem, 19vw, 15rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border-strong);
+    user-select: none;
+    pointer-events: none;
+  }
+</style>
