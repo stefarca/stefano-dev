@@ -18,42 +18,36 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Meterphase",
-    period: "2025",
+    title: "Industrial Telemetry Alerting Engine",
+    period: "2024 · ~4 months",
     blurb:
-      "A usage-metering and billing engine that turns raw event streams into invoices.",
+      "Full replacement of a legacy on-prem alerting system that could no longer handle the volume.",
     detail:
-      "Designed the ingestion pipeline and aggregation model, cutting end-of-month billing runs from hours to seconds while keeping every number auditable back to the source event.",
-    tags: ["Rust", "Postgres", "Kafka", "gRPC"],
-    links: [
-      { label: "Case study", href: "#" },
-      { label: "Source", href: "https://github.com/stefarca" },
-    ],
+      "Designed and built entirely solo, from scratch to production in about four months. Processes over 1,000 events per minute from around 30 production lines via Azure Service Bus, with 100–200 ms from ingestion to notification and Redis holding application state at low latency under load. Plant managers configure alert conditions, notification channel and delay per rule; shop-floor operators are notified via web push and Wear OS smartwatches, so they can act on the line without returning to a workstation.",
+    tags: [".NET", "Azure Service Bus", "Redis", "Container Apps"],
+    links: [],
     featured: true,
   },
   {
-    title: "Halflight",
-    period: "2024",
+    title: "Global Service Management Platform",
+    period: "2017 — present · technical owner",
     blurb:
-      "An open-source status-page generator that builds from a single YAML file.",
+      "Business-critical web application covering the full lifecycle of installed machines, used worldwide.",
     detail:
-      "Built the static generator and incident timeline. Ships as a 40 kB page with no runtime JavaScript and deploys to any static host in one command.",
-    tags: ["TypeScript", "Astro", "Cloudflare", "SVG"],
-    links: [
-      { label: "Live demo", href: "#" },
-      { label: "Source", href: "https://github.com/stefarca" },
-    ],
+      "Technical owner of a system spanning installation, maintenance contracts, field service, spare parts, quotes and decommissioning, feeding the downstream billing system — over a thousand uses per day. Started with two developers and a manager acting as intermediary; today I'm the sole technical point of reference, with the business reaching out directly. Migrated the legacy codebase from Java 6 to Java 11 with no service interruption, across nine years of continuous evolution.",
+    tags: ["Java 11", "Struts", "DB2"],
+    links: [],
     featured: true,
   },
   {
-    title: "Cranefold",
-    period: "2023",
+    title: "CI/CD on Azure DevOps",
+    period: "Ongoing",
     blurb:
-      "A generative-art experiment that grows origami crease patterns in the browser.",
+      "Introduced pipelines that took releases from one every 3–4 weeks to one per week per application.",
     detail:
-      "A weekend project that got out of hand: a constraint solver for flat-foldability rendered on canvas, with exports you can actually print and fold.",
-    tags: ["Canvas", "WebGL", "Geometry"],
-    links: [{ label: "Play", href: "#" }],
+      "Built and now manage 6–7 Azure DevOps pipelines. Brought test coverage up to around 80% on codebases that previously had none, with xUnit, Moq and Testcontainers, plus Serilog, OpenTelemetry and Dynatrace for observability.",
+    tags: ["Azure DevOps", "xUnit", "Testcontainers", "OpenTelemetry"],
+    links: [],
     featured: true,
   },
 ];

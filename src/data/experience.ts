@@ -15,27 +15,11 @@ export interface Job {
 
 export const experience: Job[] = [
   {
-    role: "Senior Software Engineer",
-    org: "Northwind Labs",
-    start: "2022",
+    role: "Senior Backend & Cloud Engineer",
+    org: "Job Informatica",
+    start: "2017",
     end: "Present",
     summary:
-      "Lead engineer on the data platform: billing, metering, and the internal APIs the rest of the product builds on.",
-  },
-  {
-    role: "Software Engineer",
-    org: "Fathom Interactive",
-    start: "2019",
-    end: "2022",
-    summary:
-      "Shipped customer-facing features across a React front end and a Node/Postgres back end for a mid-size analytics product.",
-  },
-  {
-    role: "Full-stack Developer",
-    org: "Studio Ampersand",
-    start: "2016",
-    end: "2019",
-    summary:
-      "Agency work: built and maintained a dozen client sites and web apps, from CMS integrations to a small e-commerce platform.",
+      "Technical reference point for a global appliance manufacturer (Electrolux) across two divisions and two technology stacks. Joined as a developer on assigned projects; scope grew to requirements analysis run directly with the client's service business leads in Sweden, autonomous architecture on owned projects, and code review and guidance for 2–3 developers. More than six systems delivered single-handedly from analysis to production; introduced Azure DevOps CI/CD, moving releases from once every 3–4 weeks to weekly per application.",
   },
 ];

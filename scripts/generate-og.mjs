@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 
 const W = 1200;
 const H = 630;
-const ROLE = "Software engineer";
+const ROLE = "Senior Backend & Cloud Engineer";
 const DOMAIN = "stefano.dev";
 
 const dots = [];
@@ -45,7 +45,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
   <g fill="#ffffff" fill-opacity="0.05">${dots.join("")}</g>
   <rect width="${W}" height="${H}" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2" />
 
-  <text x="80" y="150" font-family="Ubuntu, 'DejaVu Sans', sans-serif" font-size="26" letter-spacing="6" fill="#9aa0aa">${ROLE.toUpperCase()}</text>
+  <text x="80" y="150" font-family="Ubuntu, 'DejaVu Sans', sans-serif" font-size="26" letter-spacing="6" fill="#9aa0aa">${ROLE.toUpperCase().replace(/&/g, "&amp;")}</text>
 
   <text x="76" y="360" font-family="Ubuntu, 'DejaVu Sans', sans-serif" font-weight="700" font-size="150" letter-spacing="-4" fill="#e7e7ea">Stefano</text>
   <text x="76" y="500" font-family="Ubuntu, 'DejaVu Sans', sans-serif" font-weight="700" font-size="150" letter-spacing="-4" fill="url(#accent)">Esarca</text>

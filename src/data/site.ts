@@ -5,9 +5,9 @@
 export const site = {
   url: "https://stefano.dev",
   title: "Stefano Esarca",
-  tagline: "Software engineer",
+  tagline: "Senior Backend & Cloud Engineer",
   description:
-    "Stefano Esarca — software engineer building reliable backends and thoughtful interfaces for the web.",
+    "Stefano Esarca — Senior Backend & Cloud Engineer building cloud-native systems in .NET and Azure, and technical owner of a business-critical Java platform.",
   locale: "en",
   ogImage: "/og.png",
   themeColor: "#0b0b0f",
