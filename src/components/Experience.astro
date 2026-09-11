@@ -38,21 +38,20 @@ import { experience } from "../data/experience";
 
   .timeline__marker {
     position: absolute;
-    left: 0;
-    top: 0.55rem;
-    width: 9px;
-    height: 9px;
-    border-radius: var(--radius-full);
-    background: var(--accent-gradient);
-    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent-1) 15%, transparent);
+    left: -2px;
+    top: 0.4rem;
+    width: 11px;
+    height: 11px;
+    background: var(--accent-1);
+    border: var(--border-w) solid var(--border);
   }
   .timeline__item::before {
     content: "";
     position: absolute;
-    left: 4px;
-    top: 1.2rem;
+    left: 3px;
+    top: 1.3rem;
     bottom: -1.9rem;
-    width: 1px;
+    width: var(--border-w);
     background: var(--border);
   }
   .timeline__item:last-child::before {
@@ -60,8 +59,8 @@ import { experience } from "../data/experience";
   }
 
   .timeline__period {
-    font: 500 var(--step--1) / 1.4 var(--font-mono);
-    letter-spacing: 0.04em;
+    font: 700 var(--step--1) / 1.4 var(--font-mono);
+    letter-spacing: 0.02em;
     color: var(--text-mute);
     white-space: nowrap;
   }
@@ -74,8 +73,9 @@ import { experience } from "../data/experience";
     font-family: var(--font-display);
   }
   .timeline__org {
-    color: var(--text-dim);
-    font-weight: 400;
+    color: var(--accent-2);
+    font-weight: 700;
+    text-transform: none;
   }
   .timeline__summary {
     margin-top: 0.35rem;

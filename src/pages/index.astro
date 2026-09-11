@@ -12,33 +12,46 @@ import Contact from "../components/Contact.astro";
 <Layout>
   <Hero />
 
-  <Section id="about" index="01" title="About" eyebrow="Who's writing">
-    <About />
-  </Section>
+  <div class="bento container">
+    <Section id="about" title="About" eyebrow="Who's writing" full>
+      <About />
+    </Section>
 
-  <Section
-    id="work"
-    index="02"
-    title="Selected work"
-    eyebrow="A few things I've built"
-  >
-    <Work />
-  </Section>
+    <Section
+      id="work"
+      title="Selected work"
+      eyebrow="A few things I've built"
+      full
+    >
+      <Work />
+    </Section>
 
-  <Section id="stack" index="03" title="Stack" eyebrow="Tools I reach for">
-    <Stack />
-  </Section>
+    <Section id="stack" title="Stack" eyebrow="Tools I reach for">
+      <Stack />
+    </Section>
 
-  <Section
-    id="experience"
-    index="04"
-    title="Experience"
-    eyebrow="Where I've worked"
-  >
-    <Experience />
-  </Section>
+    <Section id="experience" title="Experience" eyebrow="Where I've worked">
+      <Experience />
+    </Section>
 
-  <Section id="contact" index="05" title="Contact" eyebrow="Say hello">
-    <Contact />
-  </Section>
+    <Section id="contact" title="Contact" eyebrow="Say hello" full>
+      <Contact />
+    </Section>
+  </div>
 </Layout>
+
+<style>
+  .bento {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-l);
+    padding-block: var(--space-2xl) var(--space-3xl);
+  }
+
+  @media (min-width: 55rem) {
+    .bento {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+  }
+</style>

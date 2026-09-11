@@ -38,9 +38,10 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.08;
+  font-weight: 700;
+  line-height: 0.98;
   letter-spacing: -0.02em;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 
@@ -131,50 +132,55 @@ ol[role="list"] {
   transform: translateY(0);
 }
 
-/* Gradient text used for the name / accents */
+/* Highlighter-marker text used for the name / accents */
 .accent-text {
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  background: var(--accent-1);
+  color: var(--accent-ink);
+  padding-inline: 0.15em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
-/* Mono eyebrow / label */
+/* Tag-badge eyebrow / label */
 .eyebrow {
-  font: 500 var(--step--1) / 1 var(--font-mono);
-  letter-spacing: 0.18em;
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  border: var(--border-w) solid var(--border);
+  background: var(--bg-elev);
+  font: 700 var(--step--1) / 1 var(--font-mono);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--text);
 }
 
-/* --- Buttons ------------------------------------------------------- */
+/* --- Buttons — solid blocks with a hard offset shadow -------------- */
 .btn {
-  --btn-bg: transparent;
+  --btn-bg: var(--bg-elev);
   --btn-fg: var(--text);
-  --btn-border: var(--border-strong);
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.8rem 1.25rem;
-  border: 1px solid var(--btn-border);
+  padding: 0.85rem 1.4rem;
+  border: var(--border-w) solid var(--border);
   border-radius: var(--radius-full);
   background: var(--btn-bg);
   color: var(--btn-fg);
-  font: 500 var(--step--1) / 1 var(--font-mono);
-  letter-spacing: 0.04em;
+  font: 700 var(--step--1) / 1 var(--font-display);
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   cursor: pointer;
+  box-shadow: var(--shadow-1);
   transition:
     transform var(--dur) var(--ease-out),
-    border-color var(--dur) var(--ease-out),
-    background var(--dur) var(--ease-out),
-    color var(--dur) var(--ease-out);
+    box-shadow var(--dur) var(--ease-out);
 }
 .btn:hover {
-  transform: translateY(-2px);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--text);
 }
 .btn:active {
-  transform: translateY(0);
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--text);
 }
 .btn svg {
   width: 1em;
@@ -182,18 +188,14 @@ ol[role="list"] {
 }
 
 .btn--primary {
-  --btn-fg: #0b0b0f;
-  --btn-border: transparent;
-  background: var(--accent-gradient);
-  box-shadow: 0 10px 30px -12px var(--glow);
-}
-.btn--primary:hover {
-  box-shadow: 0 16px 40px -12px var(--glow);
+  --btn-bg: var(--accent-1);
+  --btn-fg: var(--accent-ink);
 }
 
 .btn--ghost:hover {
-  --btn-border: var(--accent-1);
-  color: var(--accent-1);
+  --btn-bg: var(--accent-2);
+  --btn-fg: var(--accent-ink);
+  border-color: var(--text);
 }
 
 /* Scroll-reveal: elements start shifted + transparent, .is-visible clears it.

@@ -8,16 +8,15 @@ const lastName = rest.join(" ");
 <section class="hero" id="top">
   <div class="container hero__inner">
     <p class="eyebrow hero__eyebrow">
-      {profile.role} <span class="hero__dot">·</span>
-      {profile.location}
+      {profile.role} — {profile.location}
     </p>
 
     <h1 class="hero__name" aria-label={profile.name}>
       <span class="hero__name-line" aria-hidden="true">
         {firstName}
       </span>
-      <span class="hero__name-line accent-text" aria-hidden="true">
-        {lastName}
+      <span class="hero__name-line" aria-hidden="true">
+        <span class="accent-text">{lastName}</span>
       </span>
     </h1>
 
@@ -30,7 +29,7 @@ const lastName = rest.join(" ");
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
+          stroke-width="2.4"
           aria-hidden="true"
         >
           <path
@@ -56,11 +55,8 @@ const lastName = rest.join(" ");
     </div>
   </div>
 
-  <a class="hero__scroll" href="#about" aria-label="Scroll to about">
-    <span class="hero__scroll-text">Scroll</span>
-    <span class="hero__scroll-track">
-      <span class="hero__scroll-thumb"></span>
-    </span>
+  <a class="hero__scroll btn" href="#about" aria-label="Scroll to about">
+    ↓
   </a>
 </section>
 
@@ -81,48 +77,47 @@ const lastName = rest.join(" ");
   }
 
   .hero__eyebrow {
+    background: var(--bg-elev);
     opacity: 0;
-    animation: hero-in 0.7s var(--ease-out) 0.05s forwards;
-  }
-  .hero__dot {
-    margin-inline: 0.4rem;
-    color: var(--accent-1);
+    animation: hero-in 0.5s var(--ease-out) 0.05s forwards;
   }
 
   .hero__name {
     font-size: var(--step-6);
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 0.95;
+    line-height: 0.88;
   }
   .hero__name-line {
     display: block;
     opacity: 0;
-    animation: hero-in 0.9s var(--ease-out) forwards;
+    animation: hero-in 0.6s var(--ease-out) forwards;
   }
   .hero__name-line:nth-child(1) {
-    animation-delay: 0.12s;
+    animation-delay: 0.1s;
   }
   .hero__name-line:nth-child(2) {
-    animation-delay: 0.22s;
+    animation-delay: 0.18s;
   }
 
   .hero__pitch {
-    max-width: 46ch;
+    max-width: 42ch;
     font-size: var(--step-2);
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
     color: var(--text-dim);
-    line-height: 1.45;
     opacity: 0;
-    animation: hero-in 0.9s var(--ease-out) 0.34s forwards;
+    animation: hero-in 0.6s var(--ease-out) 0.3s forwards;
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.9rem;
     margin-top: var(--space-s);
     opacity: 0;
-    animation: hero-in 0.9s var(--ease-out) 0.46s forwards;
+    animation: hero-in 0.6s var(--ease-out) 0.42s forwards;
   }
 
   .hero__scroll {
@@ -130,49 +125,34 @@ const lastName = rest.join(" ");
     left: 50%;
     bottom: 1.75rem;
     translate: -50% 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--text-mute);
-    font: 500 0.7rem / 1 var(--font-mono);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    justify-content: center;
+    font-size: var(--step-1);
     opacity: 0;
-    animation: hero-in 1s var(--ease-out) 0.7s forwards;
-  }
-  .hero__scroll-track {
-    width: 1px;
-    height: 3rem;
-    background: var(--border-strong);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero__scroll-thumb {
-    position: absolute;
-    inset: 0 auto auto 0;
-    width: 100%;
-    height: 40%;
-    background: var(--accent-gradient);
-    animation: scroll-cue 2.2s var(--ease-in-out) infinite;
+    animation:
+      hero-in 0.7s var(--ease-out) 0.6s forwards,
+      scroll-bob 1.6s var(--ease-in-out) 0.6s infinite;
   }
 
   @keyframes hero-in {
     from {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(14px);
     }
     to {
       opacity: 1;
       transform: none;
     }
   }
-  @keyframes scroll-cue {
-    0% {
-      transform: translateY(-100%);
-    }
+  @keyframes scroll-bob {
+    0%,
     100% {
-      transform: translateY(250%);
+      transform: translate(-50%, 0);
+    }
+    50% {
+      transform: translate(-50%, 6px);
     }
   }
 
@@ -189,9 +169,6 @@ const lastName = rest.join(" ");
     .hero__actions,
     .hero__scroll {
       opacity: 1;
-      animation: none;
-    }
-    .hero__scroll-thumb {
       animation: none;
     }
   }

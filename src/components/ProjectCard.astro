@@ -10,108 +10,79 @@ const { project, index } = Astro.props;
 const num = String(index + 1).padStart(2, "0");
 ---
 
-<article
-  class="card reveal"
-  data-card
-  style={`--reveal-delay: ${index * 80}ms`}
->
-  <div class="card__spot" aria-hidden="true"></div>
-  <div class="card__inner">
-    <div class="card__meta">
-      <span class="card__num">{num}</span>
-      <span class="card__period">{project.period}</span>
-    </div>
-
-    <div class="card__main">
-      <h3 class="card__title">{project.title}</h3>
-      <p class="card__blurb">{project.blurb}</p>
-      <p class="card__detail">{project.detail}</p>
-
-      <ul class="card__tags" role="list">
-        {project.tags.map((tag) => (
-          <li>{tag}</li>
-        ))}
-      </ul>
-
-      {project.links.length > 0 && (
-        <div class="card__links">
-          {project.links.map((link) => (
-            <a
-              href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-            >
-              {link.label}
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                aria-hidden="true"
-              >
-                <path
-                  d="M7 17 17 7M8 7h9v9"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
+<article class="card reveal" style={`--reveal-delay: ${index * 80}ms`}>
+  <div class="card__meta">
+    <span class="card__num">{num}</span>
+    <span class="card__period">{project.period}</span>
   </div>
+
+  <h3 class="card__title">{project.title}</h3>
+  <p class="card__blurb">{project.blurb}</p>
+  <p class="card__detail">{project.detail}</p>
+
+  <ul class="card__tags" role="list">
+    {project.tags.map((tag, i) => (
+      <li class:list={[i % 2 === 0 ? "card__tags--a" : "card__tags--b"]}>
+        {tag}
+      </li>
+    ))}
+  </ul>
+
+  {project.links.length > 0 && (
+    <div class="card__links">
+      {project.links.map((link) => (
+        <a
+          href={link.href}
+          target={link.href.startsWith("http") ? "_blank" : undefined}
+          rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+        >
+          {link.label}
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            aria-hidden="true"
+          >
+            <path
+              d="M7 17 17 7M8 7h9v9"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      ))}
+    </div>
+  )}
 </article>
 
 <style>
   .card {
-    position: relative;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-l);
-    background: color-mix(in oklab, var(--bg-elev) 62%, transparent);
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    border: var(--border-w) solid var(--border);
+    background: var(--bg);
+    box-shadow: var(--shadow-1);
+    padding: clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
     transition:
       transform var(--dur) var(--ease-out),
-      border-color var(--dur) var(--ease-out),
-      background var(--dur) var(--ease-out);
+      box-shadow var(--dur) var(--ease-out);
   }
   .card:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-strong);
-    background: color-mix(in oklab, var(--bg-elev) 85%, transparent);
-  }
-
-  .card__spot {
-    position: absolute;
-    inset: -1px;
-    opacity: 0;
-    transition: opacity var(--dur) var(--ease-out);
-    background: radial-gradient(
-      16rem 16rem at var(--mx, 50%) var(--my, 0%),
-      var(--accent-soft),
-      transparent 70%
-    );
-  }
-  .card:hover .card__spot {
-    opacity: 1;
-  }
-
-  .card__inner {
-    position: relative;
-    display: grid;
-    gap: var(--space-s);
-    padding: clamp(1.25rem, 0.9rem + 1.6vw, 2rem);
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 var(--text);
   }
 
   .card__meta {
     display: flex;
     justify-content: space-between;
-    font: 500 var(--step--1) / 1 var(--font-mono);
-    letter-spacing: 0.08em;
+    font: 700 var(--step--1) / 1 var(--font-mono);
+    letter-spacing: 0.04em;
     color: var(--text-mute);
   }
   .card__num {
-    color: var(--accent-1);
+    color: var(--accent-2);
   }
 
   .card__title {
@@ -120,12 +91,11 @@ const num = String(index + 1).padStart(2, "0");
 
   .card__blurb {
     font-size: var(--step-1);
+    font-weight: 600;
     color: var(--text);
-    max-width: 52ch;
   }
   .card__detail {
     color: var(--text-dim);
-    max-width: 60ch;
   }
 
   .card__tags {
@@ -136,11 +106,15 @@ const num = String(index + 1).padStart(2, "0");
   }
   .card__tags li {
     padding: 0.3rem 0.6rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-s);
-    font: 500 0.75rem / 1 var(--font-mono);
-    letter-spacing: 0.03em;
-    color: var(--text-dim);
+    font: 700 0.75rem / 1 var(--font-mono);
+    letter-spacing: 0.02em;
+    color: var(--accent-ink);
+  }
+  .card__tags--a {
+    background: var(--accent-1);
+  }
+  .card__tags--b {
+    background: var(--accent-2);
   }
 
   .card__links {
@@ -153,11 +127,12 @@ const num = String(index + 1).padStart(2, "0");
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    font: 500 var(--step--1) / 1 var(--font-mono);
-    letter-spacing: 0.04em;
+    font: 700 var(--step--1) / 1 var(--font-display);
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--text-dim);
-    transition: color var(--dur) var(--ease-out);
+    color: var(--text);
+    border-bottom: var(--border-w) solid var(--border);
+    transition: border-color var(--dur) var(--ease-out);
   }
   .card__links a svg {
     width: 0.85em;
@@ -165,46 +140,9 @@ const num = String(index + 1).padStart(2, "0");
     transition: transform var(--dur) var(--ease-out);
   }
   .card__links a:hover {
-    color: var(--accent-1);
+    border-color: var(--accent-2);
   }
   .card__links a:hover svg {
     transform: translate(2px, -2px);
   }
-
-  @media (min-width: 40rem) {
-    .card__inner {
-      grid-template-columns: 4rem minmax(0, 1fr);
-      column-gap: var(--space-l);
-      align-items: start;
-    }
-    .card__meta {
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-  }
 </style>
-
-<script>
-  const cards = document.querySelectorAll<HTMLElement>("[data-card]");
-  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-  if (fine) {
-    for (const card of cards) {
-      card.addEventListener(
-        "pointermove",
-        (e) => {
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty(
-            "--mx",
-            `${((e.clientX - rect.left) / rect.width) * 100}%`,
-          );
-          card.style.setProperty(
-            "--my",
-            `${((e.clientY - rect.top) / rect.height) * 100}%`,
-          );
-        },
-        { passive: true },
-      );
-    }
-  }
-</script>
