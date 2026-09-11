@@ -39,24 +39,27 @@
   .theme-toggle {
     display: grid;
     place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-full);
-    background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
-    color: var(--text-dim);
+    width: 2.75rem;
+    height: 2.75rem;
+    border: var(--border-w) solid var(--border);
+    background: var(--bg-elev);
+    color: var(--text);
     cursor: pointer;
+    box-shadow: var(--shadow-1);
     transition:
-      color var(--dur) var(--ease-out),
-      border-color var(--dur) var(--ease-out),
-      transform var(--dur) var(--ease-out);
+      background var(--dur) var(--ease-out),
+      transform var(--dur) var(--ease-out),
+      box-shadow var(--dur) var(--ease-out);
   }
   .theme-toggle:hover {
-    color: var(--text);
-    border-color: var(--border-strong);
+    background: var(--accent-1);
+    color: var(--accent-ink);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--text);
   }
   .theme-toggle:active {
-    transform: scale(0.94);
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--text);
   }
 
   .theme-toggle__icon .sun {

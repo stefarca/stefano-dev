@@ -25,14 +25,14 @@ import { stack } from "../data/stack";
     display: grid;
     gap: var(--space-s);
     padding-top: var(--space-s);
-    border-top: 1px solid var(--border);
+    border-top: var(--border-w) solid var(--border);
   }
 
   .stack__label {
-    font: 500 var(--step--1) / 1 var(--font-mono);
-    letter-spacing: 0.16em;
+    font: 700 var(--step--1) / 1 var(--font-display);
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--text-mute);
+    color: var(--accent-2);
   }
 
   .stack__items {
@@ -41,26 +41,17 @@ import { stack } from "../data/stack";
     gap: 0.5rem 0.6rem;
   }
   .stack__items li {
-    padding: 0.45rem 0.8rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-full);
+    padding: 0.4rem 0.75rem;
+    border: var(--border-w) solid var(--border);
     font-size: var(--step--1);
+    font-weight: 600;
     color: var(--text-dim);
-    background: color-mix(in oklab, var(--bg-elev) 45%, transparent);
     transition:
       color var(--dur) var(--ease-out),
-      border-color var(--dur) var(--ease-out);
+      background var(--dur) var(--ease-out);
   }
   .stack__items li:hover {
-    color: var(--text);
-    border-color: var(--border-strong);
-  }
-
-  @media (min-width: 52rem) {
-    .stack__group {
-      grid-template-columns: 12rem minmax(0, 1fr);
-      align-items: start;
-      gap: var(--space-m);
-    }
+    color: var(--accent-ink);
+    background: var(--accent-1);
   }
 </style>
