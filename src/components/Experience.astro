@@ -8,14 +8,17 @@ import { experience } from "../data/experience";
       <div class="timeline__marker" aria-hidden="true" />
       <div class="timeline__period">
         <span>{job.start}</span>
-        <span class="timeline__dash">—</span>
+        <span class="timeline__dash">→</span>
         <span>{job.end}</span>
       </div>
       <div class="timeline__body">
         <h3 class="timeline__role">
-          {job.role} <span class="timeline__org">· {job.org}</span>
+          <span class="timeline__hash" aria-hidden="true">
+            ##
+          </span>
+          {job.role} <span class="timeline__org">@ {job.org}</span>
         </h3>
-        <p class="timeline__summary">{job.summary}</p>
+        <p class="timeline__summary"># {job.summary}</p>
       </div>
     </li>
   ))}
@@ -39,11 +42,10 @@ import { experience } from "../data/experience";
   .timeline__marker {
     position: absolute;
     left: 0;
-    top: 0.55rem;
-    width: 9px;
-    height: 9px;
-    border-radius: var(--radius-full);
-    background: var(--accent-gradient);
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-1);
     box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent-1) 15%, transparent);
   }
   .timeline__item::before {
@@ -72,6 +74,10 @@ import { experience } from "../data/experience";
   .timeline__role {
     font-size: var(--step-1);
     font-family: var(--font-display);
+  }
+  .timeline__hash {
+    color: var(--accent-1);
+    margin-right: 0.4rem;
   }
   .timeline__org {
     color: var(--text-dim);

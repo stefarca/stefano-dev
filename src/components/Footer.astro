@@ -4,25 +4,24 @@ import { site } from "../data/site";
 
 const year = new Date().getFullYear();
 const sourceUrl = "https://github.com/stefarca/stefano-dev";
+const user = profile.name.split(" ")[0].toLowerCase();
 ---
 
 <footer class="footer">
   <div class="container footer__inner">
     <p class="footer__meta">
+      <span class="footer__prompt">{user}@portfolio:~$</span>
       <span>
-        © {year} {profile.name}
+        © {year} {profile.name} — built with Astro, deployed on Cloudflare
+        <span class="cursor" aria-hidden="true"></span>
       </span>
-      <span class="footer__sep" aria-hidden="true">
-        /
-      </span>
-      <span>Built with Astro, deployed on Cloudflare</span>
     </p>
 
     <div class="footer__links">
       <a href={sourceUrl} target="_blank" rel="noreferrer">
-        Source
+        cd source
       </a>
-      <a href="/#top">Back to top ↑</a>
+      <a href="/#top">cd ..</a>
     </div>
   </div>
   <p class="footer__wordmark" aria-hidden="true">
@@ -50,20 +49,19 @@ const sourceUrl = "https://github.com/stefarca/stefano-dev";
   .footer__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 0.75rem;
+    gap: 0.5rem 0.6rem;
     font-size: var(--step--1);
     color: var(--text-mute);
   }
-  .footer__sep {
-    color: var(--border-strong);
+  .footer__prompt {
+    color: var(--accent-1);
   }
 
   .footer__links {
     display: flex;
     gap: 1.25rem;
     font: 500 var(--step--1) / 1 var(--font-mono);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
   .footer__links a {
     color: var(--text-dim);
