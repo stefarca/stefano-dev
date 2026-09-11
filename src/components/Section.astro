@@ -17,9 +17,12 @@ const { id, index, title, eyebrow } = Astro.props;
     </div>
 
     <header class="section__head reveal">
-      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      {eyebrow && <p class="eyebrow">// {eyebrow}</p>}
       <h2 class="section__title" id={`${id}-title`}>
-        {title}
+        <span class="section__prompt" aria-hidden="true">
+          $
+        </span>
+        {title.toLowerCase()}
       </h2>
     </header>
 
@@ -47,7 +50,10 @@ const { id, index, title, eyebrow } = Astro.props;
     gap: var(--space-s);
     font: 500 var(--step--1) / 1 var(--font-mono);
     color: var(--text-mute);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.02em;
+  }
+  .section__index-num::before {
+    content: "L";
   }
   .section__index-line {
     flex: 1;
@@ -56,8 +62,15 @@ const { id, index, title, eyebrow } = Astro.props;
   }
 
   .section__title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
     font-size: var(--step-4);
     margin-top: 0.25rem;
+    text-transform: none;
+  }
+  .section__prompt {
+    color: var(--accent-1);
   }
 
   .section__body {

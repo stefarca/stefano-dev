@@ -10,11 +10,13 @@ import { profile } from "../data/profile";
   </div>
 
   <aside class="about__now reveal" style="--reveal-delay: 90ms">
-    <p class="eyebrow">Currently</p>
+    <p class="eyebrow">// currently</p>
     <ul role="list">
       {profile.now.map((item) => (
         <li>
-          <span class="about__now-tick" aria-hidden="true" />
+          <span class="about__now-tick" aria-hidden="true">
+            &gt;
+          </span>
           {item}
         </li>
       ))}
@@ -58,11 +60,8 @@ import { profile } from "../data/profile";
     font-size: var(--step-0);
   }
   .about__now-tick {
-    width: 7px;
-    height: 7px;
-    border-radius: 2px;
-    background: var(--accent-gradient);
-    translate: 0 -1px;
+    color: var(--accent-1);
+    font-family: var(--font-mono);
   }
 
   @media (min-width: 46rem) {
